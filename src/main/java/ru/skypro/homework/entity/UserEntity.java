@@ -7,6 +7,7 @@ import lombok.experimental.Accessors;
 import ru.skypro.homework.dto.Role;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -18,16 +19,25 @@ public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     @Column(name = "email", unique = true)
     private String email;
+
     @Column(name = "first_name", nullable = false)
     private String firstName;
+
     @Column(name = "last_name", nullable = false)
     private String lastName;
+
     @Column(name = "phone", nullable = false)
     private String phone;
+
     @Column(name = "role")
     private Role role;
+
     @Column(name = "image")
     private String image;
+
+    @OneToMany
+    private Set<AdEntity> ads;
 }
