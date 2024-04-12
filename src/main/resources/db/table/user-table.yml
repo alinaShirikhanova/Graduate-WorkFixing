@@ -1,0 +1,34 @@
+databaseChangeLog:
+  - logicalFilePath: 0.1/user-table
+  - changeSet:
+      id: user-table-0
+      author: anton
+      changes:
+        - createTable:
+            schemaName: public
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: email
+                  type: text
+                  constraints:
+                    nullable: false
+              - column:
+                  name: firstName
+                  type: text
+              - column:
+                  name: lastName
+                  type: text
+              - column:
+                  name: phone
+                  type: text
+              - column:
+                  name: image
+                  type: text

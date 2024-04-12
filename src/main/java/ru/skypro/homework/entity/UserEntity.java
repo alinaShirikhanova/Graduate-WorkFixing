@@ -1,5 +1,6 @@
 package ru.skypro.homework.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -32,12 +33,19 @@ public class UserEntity {
     @Column(name = "phone", nullable = false)
     private String phone;
 
-    @Column(name = "role")
-    private Role role;
-
     @Column(name = "image")
     private String image;
 
-    @OneToMany
+    @JsonIgnore
+    @OneToMany(mappedBy = "author")
+    private Set<CommentEntity> comments;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "author")
     private Set<AdEntity> ads;
+
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "role_id")
+    private RoleEntity role;
 }

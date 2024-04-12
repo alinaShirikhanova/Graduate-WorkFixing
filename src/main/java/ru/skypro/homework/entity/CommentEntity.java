@@ -1,5 +1,6 @@
 package ru.skypro.homework.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -16,14 +17,16 @@ import javax.persistence.*;
 public class CommentEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer pk;
-
-    @Column(name = "author", nullable = false)
-    private UserEntity author;
+    private Integer id;
 
     @Column(name = "created_at", nullable = false)
     private Long createdAt;
 
     @Column(name = "text", nullable = false)
     private String text;
+
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "author_id")
+    private UserEntity author_id;
 }

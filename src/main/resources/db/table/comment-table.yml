@@ -1,0 +1,28 @@
+databaseChangeLog:
+  - logicalFilePath: 0.1/comment-table
+  - changeSet:
+      id: comment-table-0
+      author: anton
+      changes:
+        - createTable:
+            schemaName: public
+            tableName: comment
+            columns:
+              - column:
+                  name: pk
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: author
+                  type: ****
+                  constraints:
+                    nullable: false
+              - column:
+                  name: createdAt
+                  type: ****
+              - column:
+                  name: text
+                  type: text

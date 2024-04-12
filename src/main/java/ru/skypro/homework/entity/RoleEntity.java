@@ -8,6 +8,7 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
@@ -15,23 +16,16 @@ import javax.persistence.*;
 @Accessors(chain = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(schema = "public", name = "ad")
-public class AdEntity {
+@Table(schema = "public", name = "role")
+public class RoleEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "image", nullable = false)
-    private String image;
-
-    @Column(name = "price", nullable = false)
-    private Integer price;
-
-    @Column(name = "title", nullable = false)
-    private String title;
+    @Column(name = "name", nullable = false)
+    private String name;
 
     @JsonIgnore
-    @ManyToOne
-    @JoinColumn(name = "author_id")
-    private UserEntity author;
+    @OneToMany(mappedBy = "role")
+    private List<UserEntity> users;
 }
