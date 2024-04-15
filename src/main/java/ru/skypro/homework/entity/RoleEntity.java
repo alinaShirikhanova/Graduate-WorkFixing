@@ -26,6 +26,6 @@ public class RoleEntity {
     private String name;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "role")
+    @OneToMany(mappedBy = "role", fetch = FetchType.LAZY)
     private List<UserEntity> users;
 }

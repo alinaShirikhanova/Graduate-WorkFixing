@@ -5,7 +5,7 @@ databaseChangeLog:
       author: anton
       changes:
         - createTable:
-            schemaName: public
+            schemaName: graduate
             tableName: ads
             columns:
               - column:

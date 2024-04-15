@@ -5,7 +5,7 @@ databaseChangeLog:
       author: anton
       changes:
         - createTable:
-            schemaName: public
+            schemaName: graduate
             tableName: users
             columns:
               - column:
@@ -23,12 +23,18 @@ databaseChangeLog:
               - column:
                   name: firstName
                   type: text
+                  constraints:
+                    nullable: false
               - column:
                   name: lastName
                   type: text
+                  constraints:
+                    nullable: false
               - column:
                   name: phone
                   type: text
+                  constraints:
+                    nullable: false
               - column:
                   name: image
                   type: text

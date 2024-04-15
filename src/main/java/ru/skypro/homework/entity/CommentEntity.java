@@ -26,7 +26,7 @@ public class CommentEntity {
     private String text;
 
     @JsonIgnore
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "author_id")
-    private UserEntity author_id;
+    private UserEntity author;
 }

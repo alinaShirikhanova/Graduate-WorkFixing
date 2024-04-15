@@ -5,24 +5,19 @@ databaseChangeLog:
       author: anton
       changes:
         - createTable:
-            schemaName: public
+            schemaName: graduate
             tableName: comment
             columns:
               - column:
-                  name: pk
+                  name: id
                   type: bigint
                   autoIncrement: true
                   constraints:
                     primaryKey: true
                     nullable: false
               - column:
-                  name: author
-                  type: ****
-                  constraints:
-                    nullable: false
-              - column:
                   name: createdAt
-                  type: ****
+                  type: bigint
               - column:
                   name: text
                   type: text
