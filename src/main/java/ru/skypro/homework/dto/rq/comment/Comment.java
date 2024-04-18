@@ -1,4 +1,4 @@
-package ru.skypro.homework.dto;
+package ru.skypro.homework.dto.rq.comment;
 
 import lombok.Data;
 
@@ -8,6 +8,6 @@ public class Comment {
     private String authorImage;
     private String authorFirstName;
     private Long createdAt;
-    private Integer pk;
+    private Integer id;
     private String text;
 }

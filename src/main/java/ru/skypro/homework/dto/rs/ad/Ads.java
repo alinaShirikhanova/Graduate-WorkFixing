@@ -1,6 +1,7 @@
-package ru.skypro.homework.dto;
+package ru.skypro.homework.dto.rs.ad;
 
 import lombok.Data;
+import ru.skypro.homework.dto.rs.ad.Ad;
 
 import java.util.List;
 

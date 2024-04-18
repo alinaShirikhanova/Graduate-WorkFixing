@@ -6,6 +6,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import ru.skypro.homework.dto.*;
+import ru.skypro.homework.dto.rs.ad.Ads;
+import ru.skypro.homework.dto.rq.ad.CreateOrUpdateAd;
+import ru.skypro.homework.dto.rs.ad.Ad;
+import ru.skypro.homework.dto.rs.ad.ExtendedAd;
 
 @Slf4j
 @CrossOrigin(value = "http://localhost:3000")
@@ -13,6 +17,7 @@ import ru.skypro.homework.dto.*;
 @RequiredArgsConstructor
 @RequestMapping("/ads")
 public class AdController { //advertisement контроллер- объявление контроллера
+
     @PostMapping
     public ResponseEntity<?> createAd(@RequestPart("properties") CreateOrUpdateAd properties, @RequestPart("image") MultipartFile image) {
         return ResponseEntity.ok(new Ad());

@@ -36,5 +36,10 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
+                  name: description
+                  type: text
+                  constraints:
+                    nullable: false
+              - column:
                   name: image
                   type: text
