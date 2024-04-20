@@ -15,7 +15,7 @@ import javax.persistence.*;
 @Accessors(chain = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(schema = "public", name = "ads")
+@Table(schema = "graduate", name = "ads")
 public class AdEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

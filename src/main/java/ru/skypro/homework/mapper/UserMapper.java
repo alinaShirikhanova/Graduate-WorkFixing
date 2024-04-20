@@ -3,29 +3,31 @@ package ru.skypro.homework.mapper;
 import org.springframework.stereotype.Service;
 import ru.skypro.homework.dto.UpdateUser;
 import ru.skypro.homework.dto.User;
+import ru.skypro.homework.entity.RoleEntity;
+import ru.skypro.homework.entity.UserEntity;
+import ru.skypro.homework.repository.RoleRepository;
+import ru.skypro.homework.repository.UserRepository;
 
 @Service
 public class UserMapper {
 
-    public UpdateUser updateUserToEntity(User user) {
-        UpdateUser updateUser = new UpdateUser();
-        updateUser.setUsername(user.getFirstName());
-        updateUser.setFirstName(user.getLastName());
-        updateUser.setPhone(user.getPhone());
-        return updateUser;
+    public UpdateUser updateUserToEntity(UserEntity userEntity) {
+        UpdateUser updateUserToEntity = new UpdateUser();
+        updateUserToEntity.setUsername(userEntity.getUsername());
+        updateUserToEntity.setFirstName(userEntity.getFirstName());
+        updateUserToEntity.setPhone(userEntity.getPhone());
+        return updateUserToEntity;
     }
 
-    public User userToEntity(User user) {
-        User userEntity = new User();
-        userEntity.setId(user.getId());
-        userEntity.setEmail(user.getEmail());
-        userEntity.setFirstName(user.getFirstName());
-        userEntity.setLastName(user.getLastName());
-        userEntity.setPhone(user.getPhone());
-        userEntity.setRole(user.getRole());
-        userEntity.setImage(user.getImage());
-        return userEntity;
+    public User userToEntity(UserEntity userEntity) {
+        User userDtoToEntity = new User();
+        userDtoToEntity.setId(userEntity.getId());
+        userDtoToEntity.setEmail(userEntity.getEmail());
+        userDtoToEntity.setFirstName(userEntity.getFirstName());
+        userDtoToEntity.setLastName(userEntity.getLastName());
+        userDtoToEntity.setPhone(userEntity.getPhone());
+        userDtoToEntity.setImage(userEntity.getImage());
+        return userDtoToEntity;
     }
-
 
 }

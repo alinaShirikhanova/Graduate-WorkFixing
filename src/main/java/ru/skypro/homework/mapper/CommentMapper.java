@@ -24,22 +24,28 @@ public class CommentMapper {
         if (userEntity.isEmpty()) {
             throw new RuntimeException("Такого пользователя нету");
         }
-//        commentEntity.setAuthor(userRepository.findById(comment.getAuthor()).get());
-        commentEntity.setAuthor(userRepository.findById(comment.getAuthor()));
-        commentEntity.setAuthor(userRepository.findById(comment.getAuthorImage()));
-        commentEntity.setAuthor(userRepository.findById(comment.getAuthorFirstName()));
+        commentEntity.setAuthor(userRepository.findById(comment.getAuthor()).get());
         commentEntity.setCreatedAt(comment.getCreatedAt());
         commentEntity.setId(comment.getId());
         commentEntity.setText(comment.getText());
         return commentEntity;
     }
 
-    public CreateOrUpdateComment createOrUpdateCommentEntity(Comment comment) {
-        CreateOrUpdateComment createOrUpdateComment = new CreateOrUpdateComment();
-        createOrUpdateComment.setText(comment.getText());
-        return createOrUpdateComment;
+    public CommentEntity createOrUpdateCommentToEntity(CreateOrUpdateComment createOrUpdateComment) {
+        CommentEntity commentEntity = new CommentEntity();
+        commentEntity.setText(createOrUpdateComment.getText());
+        return commentEntity;
     }
 
-
+    public Comment commentEntityToComment(CommentEntity commentEntity) {
+        Comment comment = new Comment();
+        comment.setAuthor(commentEntity.getAuthor().getId());
+        comment.setAuthorImage(commentEntity.getAuthor().getImage());
+        comment.setAuthorFirstName(commentEntity.getAuthor().getFirstName());
+        comment.setCreatedAt(commentEntity.getCreatedAt());
+        comment.setId(commentEntity.getId());
+        comment.setText(commentEntity.getText());
+        return comment;
+    }
 
 }

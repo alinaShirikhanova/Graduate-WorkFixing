@@ -28,14 +28,14 @@ public class AdMapper {
     public ExtendedAd adEntityToExtendedAd(AdEntity adEntity) {
         ExtendedAd extendedAd = new ExtendedAd();
         extendedAd.setPk(adEntity.getId());
-        extendedAd.setAuthorFirstName(adEntity.getAuthor().getFirstName());
-        extendedAd.setAuthorLastName(adEntity.getAuthor().getLastName());
         extendedAd.setDescription(adEntity.getDescription());
-        extendedAd.setEmail(adEntity.getAuthor().getEmail());
-        extendedAd.setEmail(adEntity.getImage());
-        extendedAd.setPhone(adEntity.getAuthor().getPhone());
+        extendedAd.setImage(adEntity.getImage());
         extendedAd.setPrice(adEntity.getPrice());
         extendedAd.setTitle(adEntity.getTitle());
+        extendedAd.setAuthorFirstName(adEntity.getAuthor().getFirstName());
+        extendedAd.setAuthorLastName(adEntity.getAuthor().getLastName());
+        extendedAd.setEmail(adEntity.getAuthor().getEmail());
+        extendedAd.setPhone(adEntity.getAuthor().getPhone());
         return extendedAd;
     }
 
@@ -43,7 +43,7 @@ public class AdMapper {
         Ad ad = new Ad();
         ad.setAuthor(adEntity.getAuthor().getId());
         ad.setImage(adEntity.getImage());
-        ad.setPk(adEntity.getId());
+        ad.setId(adEntity.getId());
         ad.setPrice(adEntity.getPrice());
         ad.setTitle(adEntity.getTitle());
         return ad;

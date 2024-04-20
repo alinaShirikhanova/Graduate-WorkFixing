@@ -4,13 +4,19 @@ import lombok.Data;
 
 @Data
 public class ExtendedAd {
+    /**
+     * Поля относящиеся к сущности AdEntity
+     */
     private Integer pk;
-    private String authorFirstName;
-    private String authorLastName;
     private String description;
-    private String email;
     private String image;
-    private String phone;
     private Integer price;
     private String title;
+    /**
+     * Поля относящиеся к сущности UserEntity
+     */
+    private String authorFirstName;
+    private String authorLastName;
+    private String email;
+    private String phone;
 }
