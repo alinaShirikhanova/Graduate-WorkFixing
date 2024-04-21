@@ -37,7 +37,6 @@ public class AdController { //advertisement контроллер - объявл�
         return ResponseEntity.ok(new Ads());
     }
 
-
     /**
      * Получение информации об объявлении {@code getAdById}
      * @param id объявления
