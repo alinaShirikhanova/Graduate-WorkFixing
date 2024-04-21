@@ -33,6 +33,7 @@ public class AuthController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
     }
+
     /**
      * Регистрация пользователя
      * @param register объект содержащий информацию о пользователя
@@ -46,6 +47,4 @@ public class AuthController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
     }
-
-
 }

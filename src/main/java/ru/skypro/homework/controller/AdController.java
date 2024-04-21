@@ -47,6 +47,7 @@ public class AdController { //advertisement контроллер - объявл�
     public ResponseEntity<?> getAdById(@PathVariable("id") Integer id) {
         return ResponseEntity.ok(new ExtendedAd());
     }
+
     /**
      * Удаление объявления {@code deleteById}
      * @param id объявления
@@ -56,6 +57,7 @@ public class AdController { //advertisement контроллер - объявл�
     public ResponseEntity<?> deleteById(@PathVariable("id") Integer id) {
         return ResponseEntity.ok().build();
     }
+
     /**
      * Обновление информации об объявлении {@code getAdById}
      * @param id объявления
@@ -66,6 +68,7 @@ public class AdController { //advertisement контроллер - объявл�
     public ResponseEntity<?> getAdById(@PathVariable("id") Integer id, @RequestBody CreateOrUpdateAd createOrUpdateAd) {
         return ResponseEntity.ok(new Ad());
     }
+
     /**
      * Получение объявлений авторизованного пользователя {@code getMe}
      * @return {@code ResponseEntity.ok(new Ads())} количество объявлений пользователя, все объявления пользователя
@@ -74,6 +77,7 @@ public class AdController { //advertisement контроллер - объявл�
     public ResponseEntity<?> getMe() {
         return ResponseEntity.ok(new Ads());
     }
+
     /**
      * Обновление картинки объявления {@code getAdById}
      * @param id объявления

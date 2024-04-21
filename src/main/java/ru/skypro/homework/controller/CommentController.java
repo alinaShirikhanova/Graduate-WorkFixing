@@ -35,6 +35,7 @@ public class CommentController {
     public ResponseEntity<?> postComment(@PathVariable("id") Integer id, @RequestBody Comment comment) {
         return ResponseEntity.ok(new Comment());
     }
+
     /**
      * Удаление комментария {@code deleteComment}
      * @param adId  Id объявления
@@ -45,6 +46,7 @@ public class CommentController {
     public ResponseEntity<?> deleteComment(@PathVariable("adId") Integer adId, @PathVariable("commentId") Integer commentId) {
         return ResponseEntity.ok().build();
     }
+
     /**
      * Обновление комментария {@code updateComment}
      * @param adId  Id объявления

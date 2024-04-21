@@ -16,19 +16,40 @@ import ru.skypro.homework.dto.User;
 @RequiredArgsConstructor
 @RequestMapping("/users")
 public class UserController {
-
+    /**
+     * Обновление пароля
+     * @param newPassword новый пароль
+     * @return {@code ResponseEntity.ok(new NewPassword())} возвращает http статус
+     */
     @PostMapping("/set_password") //изменение пароля
     public ResponseEntity<?> setPassword(@RequestBody NewPassword newPassword) {
         return ResponseEntity.ok(new NewPassword());
     }
+
+    /**
+     * Получение информации об авторизованном пользователе
+     * @return {@code ResponseEntity.ok(new User())} возвращает информацию о пользователе
+     */
     @GetMapping("/me")
     public ResponseEntity<?> getUser() {
         return ResponseEntity.ok(new User());
     }
+
+    /**
+     * Обновление информации об авторизованном пользователе
+     * @param updateUser объект содержащий обновленную информацию
+     * @return {@code ResponseEntity.ok(new UpdateUser())} обновленную информацию о пользователе
+     */
     @PatchMapping("/me")
     public ResponseEntity<?> updateUser(@RequestBody UpdateUser updateUser) {
         return ResponseEntity.ok(new UpdateUser());
     }
+
+    /**
+     * Обновление аватара авторизованного пользователя
+     * @param image новый аватар пользователя
+     * @return {@code ResponseEntity.ok().build()} статус №200 или №401
+     */
     @PatchMapping(value = "/me/image", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<?> updateUserImage(@RequestParam MultipartFile image) {
         return ResponseEntity.ok().build();
