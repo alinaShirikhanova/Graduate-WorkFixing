@@ -20,6 +20,11 @@ public class AuthController {
 
     private final AuthService authService;
 
+    /**
+     * Аутентификация пользователя с последущей авторизацией
+     * @param login объект содержащий логин и пароль пользователя
+     * @return статус №200 или №401 {@link HttpStatus}
+     */
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody Login login) {
         if (authService.login(login.getUsername(), login.getPassword())) {
@@ -28,7 +33,11 @@ public class AuthController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
     }
-
+    /**
+     * Регистрация пользователя
+     * @param register объект содержащий информацию о пользователя
+     * @return статус №201 или №400 {@link HttpStatus}
+     */
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody Register register) {
         if (authService.register(register)) {

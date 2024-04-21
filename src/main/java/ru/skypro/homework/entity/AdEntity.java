@@ -17,6 +17,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Table(schema = "graduate", name = "ads")
 public class AdEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

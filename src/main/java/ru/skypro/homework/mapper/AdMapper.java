@@ -9,6 +9,11 @@ import ru.skypro.homework.entity.AdEntity;
 @Service
 public class AdMapper {
 
+    /**
+     * Пребразование DTO {@link CreateOrUpdateAd} в сущность {@link AdEntity}
+     * @param createOrUpdateAd
+     */
+
     public AdEntity createOrUpdateAdToEntity(CreateOrUpdateAd createOrUpdateAd) {
         AdEntity adEntity = new AdEntity();
         adEntity.setTitle(createOrUpdateAd.getTitle());
