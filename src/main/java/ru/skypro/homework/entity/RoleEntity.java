@@ -18,13 +18,22 @@ import java.util.List;
 @AllArgsConstructor
 @Table(schema = "graduate", name = "role")
 public class RoleEntity {
+    /**
+     * Id роли пользователя
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    /**
+     * Название роли пользователя
+     */
     @Column(name = "name", nullable = false)
     private String name;
 
+    /**
+     * Список всех пользователей
+     */
     @JsonIgnore
     @OneToMany(mappedBy = "role", fetch = FetchType.LAZY)
     private List<UserEntity> users;

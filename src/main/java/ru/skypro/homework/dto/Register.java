@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class Register {
     /**
-     * * Поля относящиеся к сущности UserEntity
+     *  Поля относящиеся к сущности UserEntity
      */
     private String username;
     private String password;
@@ -13,7 +13,7 @@ public class Register {
     private String lastName;
     private String phone;
     /**
-     * * Поля относящиеся к ENUM RoleEntity
+     *  Поля относящиеся к ENUM RoleEntity
      */
     private Role role;
 }

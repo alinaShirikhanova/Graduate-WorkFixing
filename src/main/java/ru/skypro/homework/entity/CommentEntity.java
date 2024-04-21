@@ -15,16 +15,28 @@ import javax.persistence.*;
 @Accessors(chain = true)
 @Table(schema = "graduate", name = "comments")
 public class CommentEntity {
+    /**
+     * Id комментария
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    /**
+     * дата и время создания комментария в миллисекундах с 00:00:00 01.01.1970
+     */
     @Column(name = "created_at", nullable = false)
     private Long createdAt;
 
+    /**
+     * Текст комментария
+     */
     @Column(name = "text", nullable = false)
     private String text;
 
+    /**
+     * Автор комментария
+     */
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "author_id")

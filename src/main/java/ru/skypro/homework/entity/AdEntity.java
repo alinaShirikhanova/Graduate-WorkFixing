@@ -17,23 +17,40 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Table(schema = "graduate", name = "ads")
 public class AdEntity {
-
+    /**
+     * Id объявления
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    /**
+     * Медиа файл объявления
+     */
     @Column(name = "image", nullable = false)
     private String image;
 
+    /**
+     * Цена объявления
+     */
     @Column(name = "price", nullable = false)
     private Integer price;
 
+    /**
+     * Название объявления
+     */
     @Column(name = "title", nullable = false)
     private String title;
 
+    /**
+     * Описание объявления
+     */
     @Column(name = "description", nullable = false)
     private String description;
 
+    /**
+     * Автор объявления
+     */
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "author_id")
