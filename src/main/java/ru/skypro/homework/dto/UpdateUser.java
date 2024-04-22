@@ -7,7 +7,7 @@ public class UpdateUser {
     /**
      * Поля относящиеся к сущности UserEntity
      */
-    private String username;
+    private String lastName;
     private String phone;
     private String firstName;
 }

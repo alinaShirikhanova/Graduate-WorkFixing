@@ -8,7 +8,6 @@ public class User {
      * Поля относящиеся к сущности UserEntity
      */
     private Integer id;
-    private String email;
     private String username;
     private String firstName;
     private String lastName;

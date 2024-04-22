@@ -22,10 +22,11 @@ databaseChangeLog:
                     nullable: false
                     unique: true
               - column:
-                  name: email
+                  name: password
                   type: text
                   constraints:
                     nullable: false
+                    unique: true
               - column:
                   name: firstName
                   type: text

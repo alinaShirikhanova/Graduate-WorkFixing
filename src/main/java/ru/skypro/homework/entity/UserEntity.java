@@ -27,16 +27,16 @@ public class UserEntity {
     private Integer id;
 
     /**
-     * Логин пользователя
+     * Логин пользователя / его email
      */
     @Column(name = "username", unique = true)
     private String username;
 
     /**
-     * Email пользователя
+     * Пароль пользователя
      */
-    @Column(name = "email", unique = true)
-    private String email;
+    @Column(name ="password", unique = true)
+    private String password;
 
     /**
      * Имя пользователя
