@@ -16,4 +16,6 @@ public class Register {
      *  Поля относящиеся к ENUM RoleEntity
      */
     private Role role;
+
+
 }
