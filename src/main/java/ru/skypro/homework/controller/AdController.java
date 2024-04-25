@@ -2,6 +2,7 @@ package ru.skypro.homework.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -23,8 +24,8 @@ public class AdController { //advertisement контроллер - объявл�
      * @param image медиа файл объявления
      * @return {@code ResponseEntity.ok(new Ad())} объявление добавилось
      */
-    @PostMapping
-    public ResponseEntity<?> createAd(@RequestPart("properties") CreateOrUpdateAd properties, @RequestPart("image") MultipartFile image) {
+    @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
+    public ResponseEntity<?> createAd(@RequestPart(value = "properties", required = false) CreateOrUpdateAd properties,@RequestPart("image") MultipartFile image) {
         return ResponseEntity.ok(new Ad());
     }
 
@@ -64,7 +65,7 @@ public class AdController { //advertisement контроллер - объявл�
      * @return {@code ResponseEntity.ok(new Ad())} обновленное объявление
      */
     @PatchMapping("/{id}")
-    public ResponseEntity<?> getAdById(@PathVariable("id") Integer id, @RequestBody CreateOrUpdateAd createOrUpdateAd) {
+    public ResponseEntity<?> updateAd(@PathVariable("id") Integer id, @RequestBody CreateOrUpdateAd createOrUpdateAd) {
         return ResponseEntity.ok(new Ad());
     }
 
@@ -73,19 +74,19 @@ public class AdController { //advertisement контроллер - объявл�
      * @return {@code ResponseEntity.ok(new Ads())} количество объявлений пользователя, все объявления пользователя
      */
     @GetMapping("/me")
-    public ResponseEntity<?> getMe() {
+    public ResponseEntity<Ads> getMe() {
         return ResponseEntity.ok(new Ads());
     }
 
     /**
      * Обновление картинки объявления {@code getAdById}
-     * @param id объявления
-     * @param user изменение картинки объявление пользователем
+     * @param adId объявления
+     * @param image картинки объявление пользователем
      * @return {@code ResponseEntity.ok(new User())} обновленное изображение объявления
      */
-    @PatchMapping("/{id}/image")
-    public ResponseEntity<?> getAdById(@PathVariable("id") Integer id, @RequestBody User user) {
-        return ResponseEntity.ok(new User());
+    @PatchMapping(value ="/{id}/image", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<?> updateImage(@PathVariable("id") Integer adId, @RequestPart MultipartFile image) {
+        return ResponseEntity.ok().build();
     }
 
 }

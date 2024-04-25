@@ -17,6 +17,6 @@ public class ExtendedAd {
      */
     private String authorFirstName;
     private String authorLastName;
-    private String userName;
+    private String username;
     private String phone;
 }

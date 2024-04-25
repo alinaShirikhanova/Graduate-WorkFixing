@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.skypro.homework.dto.rq.comment.Comment;
-import ru.skypro.homework.dto.CreateOrUpdateComment;
+import ru.skypro.homework.dto.rq.comment.CreateOrUpdateComment;
 import ru.skypro.homework.dto.rs.comment.Comments;
 
 @Slf4j
@@ -28,11 +28,11 @@ public class CommentController {
     /**
      * Добавление комментария к объявлению {@code postComment}
      * @param id комментария
-     * @param comment комментарий
+     * @param createOrUpdateComment комментарий
      * @return {@code ResponseEntity.ok(new Comment())} комментарий
      */
     @PostMapping("/{id}/comments")
-    public ResponseEntity<?> postComment(@PathVariable("id") Integer id, @RequestBody Comment comment) {
+    public ResponseEntity<?> postComment(@PathVariable("id") Integer id, @RequestBody CreateOrUpdateComment createOrUpdateComment) {
         return ResponseEntity.ok(new Comment());
     }
 
@@ -54,7 +54,7 @@ public class CommentController {
      * @return {@code ResponseEntity.ok(new Comment())} обновленный комментарий
      */
     @PatchMapping("/{adId}/comments/{commentId}")
-    public ResponseEntity<?> updateComment(@PathVariable("adId") Integer adId, @PathVariable("commentId") Integer commentId, @RequestBody CreateOrUpdateComment comment) {
+    public ResponseEntity<?> updateComment(@PathVariable("adId") Integer adId, @PathVariable("commentId") Integer commentId, @RequestBody CreateOrUpdateComment createOrUpdateComment) {
         return ResponseEntity.ok(new Comment());
     }
 }

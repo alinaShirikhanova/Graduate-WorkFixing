@@ -7,6 +7,7 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
@@ -33,6 +34,14 @@ public class CommentEntity {
      */
     @Column(name = "text", nullable = false)
     private String text;
+
+    /**
+     * Комментарии объявления
+     */
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ad_id")
+    private AdEntity ad;
 
     /**
      * Автор комментария

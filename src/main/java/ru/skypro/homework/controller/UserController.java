@@ -6,9 +6,9 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import ru.skypro.homework.dto.NewPassword;
-import ru.skypro.homework.dto.UpdateUser;
-import ru.skypro.homework.dto.User;
+import ru.skypro.homework.dto.rq.user.NewPassword;
+import ru.skypro.homework.dto.rq.user.UpdateUser;
+import ru.skypro.homework.dto.rs.user.User;
 
 @Slf4j
 @CrossOrigin(value = "http://localhost:3000")
@@ -23,7 +23,7 @@ public class UserController {
      */
     @PostMapping("/set_password") //изменение пароля
     public ResponseEntity<?> setPassword(@RequestBody NewPassword newPassword) {
-        return ResponseEntity.ok(new NewPassword());
+        return ResponseEntity.ok().build();
     }
 
     /**

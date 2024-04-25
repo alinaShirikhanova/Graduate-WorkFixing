@@ -9,6 +9,7 @@ import lombok.experimental.Accessors;
 import ru.skypro.homework.dto.Role;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -67,7 +68,7 @@ public class UserEntity {
      */
     @JsonIgnore
     @OneToMany(mappedBy = "author", fetch = FetchType.LAZY)
-    private Set<CommentEntity> comments;
+    private List<CommentEntity> comments;
 
     /**
      * Объявления пользователя

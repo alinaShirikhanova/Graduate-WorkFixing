@@ -39,7 +39,7 @@ public class AdMapper {
         extendedAd.setTitle(adEntity.getTitle());
         extendedAd.setAuthorFirstName(adEntity.getAuthor().getFirstName());
         extendedAd.setAuthorLastName(adEntity.getAuthor().getLastName());
-        extendedAd.setUserName(adEntity.getAuthor().getUsername());
+        extendedAd.setUsername(adEntity.getAuthor().getUsername());
         extendedAd.setPhone(adEntity.getAuthor().getPhone());
         return extendedAd;
     }

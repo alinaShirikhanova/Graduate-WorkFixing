@@ -8,6 +8,7 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
@@ -47,6 +48,15 @@ public class AdEntity {
      */
     @Column(name = "description", nullable = false)
     private String description;
+
+
+    /**
+     * Список комментариев объявления
+     */
+    @JsonIgnore
+    @OneToMany(mappedBy = "ad", fetch = FetchType.LAZY)
+    private List<CommentEntity> comments;
+
 
     /**
      * Автор объявления
