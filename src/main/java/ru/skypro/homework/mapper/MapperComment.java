@@ -14,6 +14,5 @@ public interface MapperComment {
     @Mapping(target = "author", expression = "java(commentEntity.getAuthor().getId())")
     @Mapping(target = "authorImage", expression = "java(commentEntity.getAuthor().getImage())")
     @Mapping(target = "authorFirstName", expression = "java(commentEntity.getAuthor().getFirstName())")
-    @Mapping(target = "username", expression = "java(commentEntity.getAuthor().getUsername())")
     Comment commentToEntity(CommentEntity commentEntity);
 }
