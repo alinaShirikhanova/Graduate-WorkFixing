@@ -6,11 +6,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import ru.skypro.homework.dto.Role;
 
 import javax.persistence.*;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Getter
@@ -19,7 +21,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Accessors(chain = true)
 @Table(schema = "graduate", name = "users")
-public class UserEntity {
+public class UserEntity implements UserDetails {
     /**
      * Id пользователя
      */
@@ -31,7 +33,7 @@ public class UserEntity {
      * Логин пользователя / его email
      */
     @Column(name = "email", unique = true)
-    private String email;
+    private String username;
 
     /**
      * Пароль пользователя
@@ -64,6 +66,13 @@ public class UserEntity {
     private String image;
 
     /**
+     * Акитвация аккаунта
+     * columnDefinition - значение по умолчанию
+     */
+    @Column(name = "is_active", nullable = false, columnDefinition = "boolean default false")
+    private Boolean isActive;
+
+    /**
      * Комментарии пользователя
      */
     @JsonIgnore
@@ -84,4 +93,41 @@ public class UserEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "role_id")
     private RoleEntity role;
+
+    /**
+     * getAuthorities - полномочия
+     * ofNullable - Роль может быть пустой
+     * SimpleGrantedAuthority - полномочие по Spring Sc.
+     * List::of - преобразовавыем в список полномочий
+     * orElse(Collections.emptyList()) - если роль пустая, то создается пустой лист
+     * @return
+     */
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return Optional.ofNullable(role)
+                .map(role -> "ROLE_" + role)
+                .map(SimpleGrantedAuthority::new)
+                .map(List::of)
+                .orElse(Collections.emptyList());
+    }
+
+    @Override
+    public boolean isAccountNonExpired() { //Срок действий аккаунта **true - не истек срок
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() { //Аккаунт активен
+        return isActive;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() { //Срок действия пароля
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() { //Аккаунт активен
+        return isActive;
+    }
 }

@@ -23,7 +23,6 @@ public abstract class MapperUser {
 
     public abstract UpdateUser entityToUpdateUser(UserEntity userEntity);
     @Mapping(target = "role", expression = "java(getEnumRole(userEntity))")
-    @Mapping(target = "username", source = "email")
     public abstract Register userEntityToRegister(UserEntity userEntity);
 
     @Mapping(target = "name", expression = "java(role.name())") //target - переменная объекта в которую мы мапим (expression - выражение, результат которого мы присвоим в target)

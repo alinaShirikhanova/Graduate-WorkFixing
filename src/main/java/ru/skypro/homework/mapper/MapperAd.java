@@ -17,7 +17,7 @@ public interface MapperAd {
     @Mapping(target = "pk", source = "id")
     @Mapping(target = "authorFirstName", expression = "java(adEntity.getAuthor().getFirstName())")
     @Mapping(target = "authorLastName", expression = "java(adEntity.getAuthor().getLastName())")
-    @Mapping(target = "username", expression = "java(adEntity.getAuthor().getEmail())")
+    @Mapping(target = "username", expression = "java(adEntity.getAuthor().getUsername())")
     @Mapping(target = "phone", expression = "java(adEntity.getAuthor().getPhone())")
     ExtendedAd adEntityToExtendedAd(AdEntity adEntity);
 
