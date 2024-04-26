@@ -41,10 +41,10 @@ public class UserDetailsManagerImpl implements UserDetailsManager {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<UserEntity> user = Optional.empty();
-        if (repository.findByUsername(username).equals(user)) {
-            return UsernameNotFoundException;
+        Optional<UserEntity> user = repository.findByUsername(username);
+        if (user.isEmpty(username)) {
+           throw new UsernameNotFoundException("Такого пользователя не найдено");
         }
-        return repository.findByUsername(username);
+        return user.get();
     }
 }
