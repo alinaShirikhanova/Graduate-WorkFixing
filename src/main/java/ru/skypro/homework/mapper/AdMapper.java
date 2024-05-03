@@ -8,7 +8,7 @@ import ru.skypro.homework.dto.rs.ad.ExtendedAd;
 import ru.skypro.homework.entity.AdEntity;
 
 @Mapper(componentModel = "spring")
-public interface MapperAd {
+public interface AdMapper {
 
 
     AdEntity createOrUpdateAdToEntity(CreateOrUpdateAd createOrUpdateAd);

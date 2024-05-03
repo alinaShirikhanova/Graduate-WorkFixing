@@ -33,7 +33,7 @@ public class UserController {
      */
     @PostMapping("/set_password") //изменение пароля
     public ResponseEntity<?> setPassword(@RequestBody NewPassword newPassword, Authentication authentication) {
-        userService.setPassword(newPassword, authentication);
+        userService.setPassword(newPassword, authentication.getName());
         return ResponseEntity.ok().build();
 
     }

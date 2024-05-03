@@ -7,7 +7,7 @@ import ru.skypro.homework.dto.rq.comment.CreateOrUpdateComment;
 import ru.skypro.homework.entity.CommentEntity;
 
 @Mapper(componentModel = "spring")
-public interface MapperComment {
+public interface CommentMapper {
 
     CommentEntity createOrUpdateCommentToEntity(CreateOrUpdateComment createOrUpdateComment);
 

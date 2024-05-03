@@ -12,7 +12,7 @@ import ru.skypro.homework.entity.UserEntity;
 import ru.skypro.homework.repository.UserRepository;
 
 @Mapper(componentModel = "spring")
-public abstract class MapperUser {
+public abstract class UserMapper {
 
     @Autowired
     UserRepository userRepository;
@@ -24,6 +24,8 @@ public abstract class MapperUser {
     public abstract UpdateUser entityToUpdateUser(UserEntity userEntity);
     @Mapping(target = "role", expression = "java(getEnumRole(userEntity))")
     public abstract Register userEntityToRegister(UserEntity userEntity);
+
+    public abstract UserEntity registerToUserEntity(Register register);
 
     @Mapping(target = "name", expression = "java(role.name())") //target - переменная объекта в которую мы мапим (expression - выражение, результат которого мы присвоим в target)
    public abstract RoleEntity roleToRoleEntity(Role role);

@@ -9,7 +9,7 @@ import java.util.Optional;
 
 @Repository
 public interface UserRepository extends JpaRepository<UserEntity, Integer> {
-    void deleteByUsername();
+    void deleteByUsername(String username);
 
     boolean existsByUsername(String username);
 

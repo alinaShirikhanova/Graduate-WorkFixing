@@ -28,7 +28,7 @@ public class UserDetailsManagerImpl implements UserDetailsManager {
 
     @Override
     public void deleteUser(String username) {
-        repository.deleteByUsername();
+        repository.deleteByUsername(username);
     }
 
     @Override
@@ -48,4 +48,9 @@ public class UserDetailsManagerImpl implements UserDetailsManager {
         }
         return user.get();
     }
+
+
+
+
+
 }
