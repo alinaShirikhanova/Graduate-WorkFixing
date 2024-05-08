@@ -17,7 +17,7 @@ public abstract class UserMapper {
     @Autowired
     UserRepository userRepository;
     @Mapping(target = "role", expression = "java(getEnumRole(userEntity))")
-    public abstract User userToEntity(UserEntity userEntity);
+    public abstract User userEntityToUser(UserEntity userEntity);
 
     public abstract UserEntity updateUserToEntity(UpdateUser updateUser);
 

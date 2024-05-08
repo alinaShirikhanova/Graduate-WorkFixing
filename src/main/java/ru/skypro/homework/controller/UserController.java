@@ -44,7 +44,7 @@ public class UserController {
      */
     @GetMapping("/me")
     public ResponseEntity<?> getUser() {
-        return ResponseEntity.ok(new User());
+        return ResponseEntity.ok(userService.getUser());
     }
 
     /**
@@ -54,7 +54,7 @@ public class UserController {
      */
     @PatchMapping("/me")
     public ResponseEntity<?> updateUser(@RequestBody UpdateUser updateUser) {
-        return ResponseEntity.ok(new UpdateUser());
+        return ResponseEntity.ok(userService.updateUser(updateUser));
     }
 
     /**
