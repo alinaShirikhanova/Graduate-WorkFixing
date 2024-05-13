@@ -27,7 +27,7 @@ public class CommentController {
 
     /**
      * Добавление комментария к объявлению {@code postComment}
-     * @param id комментария
+     * @param id объявления
      * @param createOrUpdateComment комментарий
      * @return {@code ResponseEntity.ok(new Comment())} комментарий
      */

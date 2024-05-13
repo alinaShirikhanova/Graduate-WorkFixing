@@ -52,6 +52,10 @@ public class UserServiceImpl implements UserService {
         userRepository.save(userEntity);
         return mapper.entityToUpdateUser(userEntity);
     }
+    @Override
+    public UserEntity getCurrentUser() {
+        return getUserByUsername(getCurrentUsername());
+    }
 
     private UserEntity getUserByUsername(String username) {
         return userRepository.findByUsername(username).orElseThrow(() -> new UserNotFoundException("Такого пользователя не найдено"));

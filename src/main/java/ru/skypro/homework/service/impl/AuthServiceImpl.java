@@ -15,7 +15,6 @@ public class AuthServiceImpl implements AuthService {
 
     private final UserDetailsManager manager;
     private final PasswordEncoder encoder;
-
     private final UserMapper userMapper;
 
     public AuthServiceImpl(UserDetailsManager manager,

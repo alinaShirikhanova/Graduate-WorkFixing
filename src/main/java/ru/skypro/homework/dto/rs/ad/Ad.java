@@ -1,8 +1,10 @@
 package ru.skypro.homework.dto.rs.ad;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
+@AllArgsConstructor
 public class Ad {
     /**
      * Поля относящиеся к сущности UserEntity

@@ -2,8 +2,10 @@ package ru.skypro.homework.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import ru.skypro.homework.dto.*;
@@ -11,6 +13,8 @@ import ru.skypro.homework.dto.rs.ad.Ads;
 import ru.skypro.homework.dto.rq.ad.CreateOrUpdateAd;
 import ru.skypro.homework.dto.rs.ad.Ad;
 import ru.skypro.homework.dto.rs.ad.ExtendedAd;
+import ru.skypro.homework.service.AdService;
+import ru.skypro.homework.service.impl.AdServiceImpl;
 
 @Slf4j
 @CrossOrigin(value = "http://localhost:3000")
@@ -18,6 +22,9 @@ import ru.skypro.homework.dto.rs.ad.ExtendedAd;
 @RequiredArgsConstructor
 @RequestMapping("/ads")
 public class AdController { //advertisement контроллер - объявление контроллера
+
+    private final AdService adService;
+
     /**
      * Добавление объявления {@code createAd}
      * @param properties свойства объявления
@@ -35,7 +42,7 @@ public class AdController { //advertisement контроллер - объявл�
      */
     @GetMapping
     public ResponseEntity<?> getAds() {
-        return ResponseEntity.ok(new Ads());
+        return ResponseEntity.ok(adService.getAllAds());
     }
 
     /**
@@ -45,7 +52,11 @@ public class AdController { //advertisement контроллер - объявл�
      */
     @GetMapping("/{id}")
     public ResponseEntity<?> getAdById(@PathVariable("id") Integer id) {
-        return ResponseEntity.ok(new ExtendedAd());
+        ExtendedAd extendedAd = adService.getInfoById(id);
+        if (extendedAd != null) {
+            return ResponseEntity.ok(extendedAd);
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
     /**
@@ -55,7 +66,10 @@ public class AdController { //advertisement контроллер - объявл�
      */
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteById(@PathVariable("id") Integer id) {
-        return ResponseEntity.ok().build();
+        if (adService.deleteAdById(id)) {
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
     /**
@@ -66,7 +80,7 @@ public class AdController { //advertisement контроллер - объявл�
      */
     @PatchMapping("/{id}")
     public ResponseEntity<?> updateAd(@PathVariable("id") Integer id, @RequestBody CreateOrUpdateAd createOrUpdateAd) {
-        return ResponseEntity.ok(new Ad());
+        return ResponseEntity.ok(adService.updateAdById(id, createOrUpdateAd));
     }
 
     /**
@@ -74,8 +88,8 @@ public class AdController { //advertisement контроллер - объявл�
      * @return {@code ResponseEntity.ok(new Ads())} количество объявлений пользователя, все объявления пользователя
      */
     @GetMapping("/me")
-    public ResponseEntity<Ads> getMe() {
-        return ResponseEntity.ok(new Ads());
+    public ResponseEntity<Ads> getAdsByUser(Authentication authentication) {
+        return ResponseEntity.ok(adService.getAdsByUser(authentication.getName()));
     }
 
     /**

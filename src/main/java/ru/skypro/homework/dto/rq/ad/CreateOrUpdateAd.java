@@ -1,8 +1,10 @@
 package ru.skypro.homework.dto.rq.ad;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
+@AllArgsConstructor
 public class CreateOrUpdateAd {
     /**
      * Поля относящиеся к сущности AdEntity

@@ -35,7 +35,6 @@ public class UserController {
     public ResponseEntity<?> setPassword(@RequestBody NewPassword newPassword, Authentication authentication) {
         userService.setPassword(newPassword, authentication.getName());
         return ResponseEntity.ok().build();
-
     }
 
     /**
