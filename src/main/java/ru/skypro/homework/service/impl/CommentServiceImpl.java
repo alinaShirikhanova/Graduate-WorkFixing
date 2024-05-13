@@ -1,5 +1,6 @@
 package ru.skypro.homework.service.impl;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import ru.skypro.homework.dto.rq.comment.Comment;
 import ru.skypro.homework.dto.rq.comment.CreateOrUpdateComment;
@@ -8,6 +9,7 @@ import ru.skypro.homework.entity.AdEntity;
 import ru.skypro.homework.entity.CommentEntity;
 import ru.skypro.homework.entity.UserEntity;
 import ru.skypro.homework.exception.AdNotFoundException;
+import ru.skypro.homework.exception.CommentNotFoundException;
 import ru.skypro.homework.mapper.CommentMapper;
 import ru.skypro.homework.repository.AdRepository;
 import ru.skypro.homework.repository.CommentRepository;
@@ -49,28 +51,38 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public Comment postComment(Integer id, CreateOrUpdateComment createOrUpdateComment) {
-        UserEntity user = userService.getCurrentUser();
-        AdEntity adEntity = adService.getAdById(id);
-        CommentEntity commentEntity = mapper.createOrUpdateCommentToEntity(createOrUpdateComment);
-        commentEntity.setAuthor(user).setAd(adEntity);
-        commentRepository.save(commentEntity);
-        return mapper.entityToComment(commentEntity);
+        return saveComment(id, createOrUpdateComment);
     }
 
     @Override
-    public Comment deleteComment(Integer id) {
-
-
+    public void deleteComment(Integer id) {
+        if (commentRepository.existsById(id)) {
+            commentRepository.deleteById(id);
+        }
+        throw new CommentNotFoundException();
     }
-
+    @PreAuthorize(value = "")
     @Override
-    public Comment updateComment(Integer id) {
-
+    public Comment updateComment(Integer idAd, Integer idComment, CreateOrUpdateComment createOrUpdateComment) {
+        if (commentRepository.existsById(idComment)) {
+            return saveComment(idAd, createOrUpdateComment);
+        }
+        throw new CommentNotFoundException("Comment not found");
     }
 
 
     private CommentEntity getCommentId(Integer id) {
         return commentRepository.getById(id);
+    }
+
+
+    private Comment saveComment(Integer adId, CreateOrUpdateComment createOrUpdateComment) {
+        UserEntity user = userService.getCurrentUser();
+        AdEntity adEntity = adService.getAdById(adId);
+        CommentEntity commentEntity = mapper.createOrUpdateCommentToEntity(createOrUpdateComment);
+        commentEntity.setAuthor(user).setAd(adEntity);
+        commentRepository.save(commentEntity);
+        return mapper.entityToComment(commentEntity);
     }
 
 

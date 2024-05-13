@@ -33,7 +33,7 @@ public class CommentController {
      */
     @PostMapping("/{id}/comments")
     public ResponseEntity<?> postComment(@PathVariable("id") Integer id, @RequestBody CreateOrUpdateComment createOrUpdateComment) {
-        return ResponseEntity.ok(new Comment());
+        return ResponseEntity.ok(postComment(id, createOrUpdateComment));
     }
 
     /**

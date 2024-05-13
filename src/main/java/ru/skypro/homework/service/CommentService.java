@@ -9,4 +9,8 @@ public interface CommentService {
     Comments getCommentsByAd(Integer id);
 
     Comment postComment(Integer id, CreateOrUpdateComment createOrUpdateComment);
+
+    void deleteComment(Integer id);
+
+    Comment updateComment(Integer idAd, Integer idComment, CreateOrUpdateComment createOrUpdateComment);
 }
