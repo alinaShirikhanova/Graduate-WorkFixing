@@ -21,10 +21,8 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 //@RequiredArgsConstructor
 @Accessors(chain = true)
-@Table(schema = "public", name = "users")
+@Table(schema = "graduate", name = "users")
 public class UserEntity implements UserDetails {
-
-
     /**
      * Id пользователя
      */
