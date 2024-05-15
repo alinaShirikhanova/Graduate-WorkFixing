@@ -25,15 +25,15 @@ import java.util.stream.Collectors;
 public class CommentServiceImpl implements CommentService {
     private final UserService userService;
     private final AdService adService;
-    private final AdEntity ad;
+
     private final CommentRepository commentRepository;
     private final AdRepository adRepository;
     private final CommentMapper mapper;
 
-    public CommentServiceImpl(UserService userService, AdService adService, AdEntity ad, CommentRepository commentRepository, AdRepository adRepository, CommentMapper commentMapper) {
+    public CommentServiceImpl(UserService userService, AdService adService,  CommentRepository commentRepository, AdRepository adRepository, CommentMapper commentMapper) {
         this.userService = userService;
         this.adService = adService;
-        this.ad = ad;
+
         this.commentRepository = commentRepository;
         this.adRepository = adRepository;
         this.mapper = commentMapper;
@@ -61,7 +61,7 @@ public class CommentServiceImpl implements CommentService {
         }
         throw new CommentNotFoundException();
     }
-    @PreAuthorize(value = "")
+
     @Override
     public Comment updateComment(Integer idAd, Integer idComment, CreateOrUpdateComment createOrUpdateComment) {
         if (commentRepository.existsById(idComment)) {

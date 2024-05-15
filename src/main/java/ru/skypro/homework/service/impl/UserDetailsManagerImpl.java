@@ -5,11 +5,13 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.stereotype.Service;
 import ru.skypro.homework.entity.UserEntity;
+import ru.skypro.homework.exception.UserNotFoundException;
 import ru.skypro.homework.repository.UserRepository;
 
 import java.util.Optional;
 @Service
 public class UserDetailsManagerImpl implements UserDetailsManager {
+
     private final UserRepository repository;
 
     public UserDetailsManagerImpl(UserRepository repository) {
@@ -18,21 +20,23 @@ public class UserDetailsManagerImpl implements UserDetailsManager {
 
     @Override
     public void createUser(UserDetails user) {
-        repository.save((UserEntity)user);
+        repository.save((UserEntity) user);
     }
 
-    @Override
     public void updateUser(UserDetails user) {
-        repository.save((UserEntity)user);
+        repository.save((UserEntity) user);
     }
-
     @Override
     public void deleteUser(String username) {
-        repository.deleteByUsername(username);
+
     }
 
     @Override
-    public void changePassword(String oldPassword, String newPassword) {
+    public void changePassword(String username, String newPassword) {
+        repository.findByUsername(username).ifPresent(userEntity -> {
+            userEntity.setPassword(newPassword);
+            repository.save(userEntity);
+        });
     }
 
     @Override
@@ -41,16 +45,9 @@ public class UserDetailsManagerImpl implements UserDetailsManager {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<UserEntity> user = repository.findByUsername(username);
-        if (user.isEmpty()) {
-           throw new UsernameNotFoundException("Такого пользователя не найдено");
-        }
-        return user.get();
+    public UserDetails loadUserByUsername(String username) {
+        return repository.findByUsername(username)
+                .orElseThrow(() -> new UserNotFoundException(""));
+
     }
-
-
-
-
-
 }

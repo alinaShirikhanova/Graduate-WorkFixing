@@ -33,7 +33,7 @@ public class AdController { //advertisement контроллер - объявл�
      */
     @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
     public ResponseEntity<?> createAd(@RequestPart(value = "properties", required = false) CreateOrUpdateAd properties,@RequestPart("image") MultipartFile image) {
-        return ResponseEntity.ok(new Ad());
+        return ResponseEntity.ok().build();
     }
 
     /**

@@ -22,7 +22,7 @@ public class CommentController {
      */
     @GetMapping("/{id}/comments")
     public ResponseEntity<?> getComment(@PathVariable("id") Integer id) {
-        return ResponseEntity.ok(new Comments());
+        return ResponseEntity.ok().build();
     }
 
     /**

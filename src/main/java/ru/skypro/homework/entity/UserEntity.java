@@ -1,27 +1,30 @@
 package ru.skypro.homework.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import lombok.experimental.Accessors;
+import org.hibernate.annotations.Cascade;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import ru.skypro.homework.dto.Role;
+
 
 import javax.persistence.*;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Entity
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
+//@RequiredArgsConstructor
 @Accessors(chain = true)
-@Table(schema = "graduate", name = "users")
+@Table(schema = "public", name = "users")
 public class UserEntity implements UserDetails {
+
+
     /**
      * Id пользователя
      */
@@ -30,17 +33,13 @@ public class UserEntity implements UserDetails {
     private Integer id;
 
     /**
-     * Логин пользователя / его email
+     * Логин пользователя
      */
-    @Column(name = "email", unique = true)
+    @Column(name = "username", unique = true)
     private String username;
 
-    /**
-     * Пароль пользователя
-     */
-    @Column(name ="password", unique = true)
+    @Column(name = "password")
     private String password;
-
     /**
      * Имя пользователя
      */
@@ -66,18 +65,11 @@ public class UserEntity implements UserDetails {
     private String image;
 
     /**
-     * Акитвация аккаунта
-     * columnDefinition - значение по умолчанию
-     */
-    @Column(name = "is_active", nullable = false, columnDefinition = "boolean default false")
-    private Boolean isActive;
-
-    /**
      * Комментарии пользователя
      */
     @JsonIgnore
     @OneToMany(mappedBy = "author", fetch = FetchType.LAZY)
-    private List<CommentEntity> comments;
+    private Set<CommentEntity> comments;
 
     /**
      * Объявления пользователя
@@ -90,18 +82,24 @@ public class UserEntity implements UserDetails {
      * Роль пользователя
      */
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "role_id")
     private RoleEntity role;
 
-    /**
-     * getAuthorities - полномочия
-     * ofNullable - Роль может быть пустой
-     * SimpleGrantedAuthority - полномочие по Spring Sc.
-     * List::of - преобразовавыем в список полномочий
-     * orElse(Collections.emptyList()) - если роль пустая, то создается пустой лист
-     * @return
-     */
+    @Column(name = "is_active", nullable = false, columnDefinition = "boolean default false")
+    private boolean isActive;
+
+
+
+//    @Override
+//    public Collection<? extends GrantedAuthority> getAuthorities() {
+//        return Optional.ofNullable(role)
+//                .map(role -> "ROLE_" + role)
+//                .map(SimpleGrantedAuthority::new)
+//                .map(List::of)
+//                .orElse(Collections.emptyList());
+//    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Optional.ofNullable(role)
@@ -112,22 +110,46 @@ public class UserEntity implements UserDetails {
     }
 
     @Override
-    public boolean isAccountNonExpired() { //Срок действий аккаунта **true - не истек срок
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return username;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
         return true;
     }
 
     @Override
-    public boolean isAccountNonLocked() { //Аккаунт активен
-        return isActive;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() { //Срок действия пароля
+    public boolean isAccountNonLocked() {
         return true;
     }
 
     @Override
-    public boolean isEnabled() { //Аккаунт активен
-        return isActive;
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserEntity that = (UserEntity) o;
+        return isActive == that.isActive && Objects.equals(id, that.id) && Objects.equals(username, that.username) && Objects.equals(password, that.password) && Objects.equals(firstName, that.firstName) && Objects.equals(lastName, that.lastName) && Objects.equals(phone, that.phone) && Objects.equals(image, that.image) && Objects.equals(comments, that.comments) && Objects.equals(ads, that.ads) && Objects.equals(role, that.role);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, username, password, firstName, lastName, phone, image, comments, ads, role, isActive);
     }
 }
